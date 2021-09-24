@@ -14,14 +14,22 @@ double newton (double x0,double eps, fptr fun, fptr fderiv,int nitermax);
 
 int main(int argc, char **argv)
 {
-    
-
-    
     double xl = 1;
     double xu = 20.0;
     double eps = 1.0e-12;
     int nmax=1000;
-
+    double x0 = 10;
+    //read params from file
+    std::ifstream fin("params.txt");
+    
+    fin>>xl;
+    fin>>xu;
+    fin>>eps;
+    fin>>nmax;
+    fin>>x0;
+    fin.close();
+    
+	//open file stream for data
     std::ofstream fout("info.txt");
     fout.precision(15); fout.setf(std::ios::scientific);
 
@@ -29,7 +37,6 @@ int main(int argc, char **argv)
     fout << xroot << "\t" << f(xroot) << "\n";
     xroot = regulafalsi(xl, xu, eps, f,nmax);
     fout << xroot << "\t" << f(xroot) << "\n";
-    double x0 = 10;
     xroot = fixedpoint(x0, eps, g, f,nmax);
     fout << xroot << "\t" << f(xroot) << "\n";
     xroot = newton(x0, eps, f, fderiv,nmax);
