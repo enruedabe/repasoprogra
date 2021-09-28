@@ -5,7 +5,6 @@
 
 int main(int argc, char const *argv[])
 {
-	int a=0,b=1,c=2,d=3;
 	const int N=10;
 
 	int data[N]{0};
