@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
+#include <string>
 
 
 using fptr = double(double);
@@ -21,14 +22,23 @@ int main(int argc, char **argv)
     double x0 = 10;
     //read params from file
     std::ifstream fin("params.txt");
-    
-    fin>>xl;
-    fin>>xu;
-    fin>>eps;
-    fin>>nmax;
-    fin>>x0;
+    std::string tmp;
+    fin>>xl>>tmp;
+    fin>>xu>>tmp;
+    fin>>eps>>tmp;
+    fin>>nmax>>tmp;
+    fin>>x0>>tmp;
     fin.close();
     
+    std::ofstream test("params_read.txt");
+    test << xl << "\n";
+    test << xu << "\n";
+    test << eps << "\n";
+    test << nmax << "\n";
+    test << x0 << "\n";
+    test.close();
+	
+
 	//open file stream for data
     std::ofstream fout("info.txt");
     fout.precision(15); fout.setf(std::ios::scientific);
